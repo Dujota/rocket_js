@@ -23,9 +23,9 @@ class Rocket {
 
   status() {
     if (this.flying) {
-      return `Rocket ${this.name} is flying through the sky!`
+      return `Rocket ${this.name} is flying through the sky!`;
     }
-    return `Rocket ${this.name} is ready for liftoff!`
+    return `Rocket ${this.name} is ready for liftoff!`;
   }
 
   /*
@@ -38,17 +38,15 @@ class Rocket {
     let signalInfo = [];
     if (messageCode === undefined) {
       signalInfo.push('boop'); // ready for a messageCode
-    } else if (messageCode < 10) {
+    } else if (messageCode < 10 && parseFloat(messageCode) !== 0.0) {
       signalInfo.push('beep');
       if (this.flying) {
         signalInfo.push('beep');
       }
+    } else if (this.flying) {
+      signalInfo = signalInfo.concat(['boop', 'boop', 'boop']);
     } else {
-      if (this.flying) {
-        signalInfo = signalInfo.concat(['boop', 'boop', 'boop']);
-      } else {
-        signalInfo = signalInfo.concat(['boop', 'beep', 'beep']);
-      }
+      signalInfo = signalInfo.concat(['boop', 'beep', 'beep']);
     }
 
     return signalInfo.join(' ');
@@ -57,17 +55,30 @@ class Rocket {
   // helper methods - don't need to test these!
 
   randomName() {
-    const prefixes = ["aries", "taurus", "gemini", "cancer", "leo", "virgo", "libra", "scorpio", "sagittarius", "capricorn", "aquarius", "pisces"],
-          suffixes = ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x"];
-    const randomPrefix = this.getRandom(prefixes),
-          randomSuffix = this.getRandom(suffixes);
+    const prefixes = [
+      'aries',
+      'taurus',
+      'gemini',
+      'cancer',
+      'leo',
+      'virgo',
+      'libra',
+      'scorpio',
+      'sagittarius',
+      'capricorn',
+      'aquarius',
+      'pisces',
+    ];
+    const suffixes = ['i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii', 'viii', 'ix', 'x'];
+    const randomPrefix = this.getRandom(prefixes);
+    const randomSuffix = this.getRandom(suffixes);
     const capitalizedPrefix = randomPrefix.charAt(0).toUpperCase() + randomPrefix.slice(1);
 
     return `${capitalizedPrefix} ${randomSuffix.toUpperCase()}`;
   }
 
   randomColour() {
-    const colour_list = ["red", "yellow", "blue", "green", "purple", "orange"];
+    const colour_list = ['red', 'yellow', 'blue', 'green', 'purple', 'orange'];
     return this.getRandom(colour_list);
   }
 
